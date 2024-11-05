@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #061014; /* Cor do fundo da tela */
+}
+
+.jogo {
+    position: relative;
+    width: 80%;
+    height: 600px;
+    overflow: hidden;
+}
+
+.cenario {
+    position: absolute;
+    width: 100%;
+    height: 115%;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Plano de fundo */
+}
+
+
+.cone {
+    position: absolute;
+    bottom: 0;
+    width: 490px;
+    height: 200px; /* Exemplo de altura fixa */
+    z-index: 2;
+    animation: coneAnimado 1.6s infinite linear;
+    object-fit: contain; /* Mantém a proporção e preenche o tamanho */
+}
+
+@keyframes coneAnimado {
+    from {
+        right: -90px;
+    }
+    to {
+        right: 100%;
+    }
+}
+
+.estudante {
+    width: 180px;
+    
+    position: absolute;
+    bottom: 150px; /* Ajuste para uma altura acima da grama */
+    left: 5%;
+    z-index: 4;
+    animation: skatistaCorrendo 1s steps(8) infinite;
+}
+
+@keyframes skatistaCorrendo {
+    from {
+        background-position: 15;
+    }
+    to {
+        background-position: 10px; 
+    }
+}
+
+.pulo {
+    animation: pulo 500ms ease-out;
+}
+
+@keyframes pulo {
+    0% { bottom: 150px; } /* Posição inicial em relação à grama */
+    40%, 50%, 60% { bottom: 300px; } /* Altura máxima do pulo */
+    100% { bottom: 150px; } 
+}
+
+#contador {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 60px;
+    font-weight: bold;
+    color: rgb(8, 8, 8);
+    z-index: 5;
+}
+
+#mensagem-perda {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    color: #040404;
+    font-size: 34px;
+    font-weight: bold;
+    z-index: 6;
+}
+#vidas {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 5;
+    display: flex;
+    gap: 10px;
+}
+
+.icone-vida {
+    width: 30px; /* Tamanho da imagem de vida */
+    height: 30px;
+}
