@@ -3,13 +3,14 @@ const contadorElement = document.getElementById("contador");
 const jogo = document.querySelector(".jogo");
 const musicaFundo = document.getElementById("musica-fundo");
 const vidasContainer = document.getElementById("vidas");
-const cones = document.querySelectorAll(".cone"); // Seleciona todos os cones
+const cones = document.querySelectorAll(".cone"); 
 
 let contador = 0;
 let vidas = 3; // Número inicial de vidas
 let passouCone = false;
 let indiceConeAtual = 0; // Índice do obstáculo atualmente exibido
 let intervaloObstaculos = 2000; // Tempo em milissegundos entre a exibição dos obstáculos
+let jogoAtivo = true; // Variável para controlar o estado do jogo
 
 estudante.style.bottom = "-20px";
 musicaFundo.play();
@@ -26,6 +27,7 @@ const exibirVidas = () => {
 };
 
 const pulo = () => {
+  if (!jogoAtivo) return; // Impede o pulo se o jogo acabou
   estudante.classList.add("pulo");
 
   setTimeout(() => {
@@ -40,6 +42,7 @@ const colisao = () => {
 
   if (vidas <= 0) {
     // Se as vidas acabarem, o jogo termina
+    jogoAtivo = false; // Marca o jogo como inativo
     const mensagemPerda = document.getElementById("mensagem-perda");
     mensagemPerda.style.display = "block";
 
@@ -50,13 +53,19 @@ const colisao = () => {
     musicaFundo.pause();
     musicaFundo.currentTime = 0;
 
+    // Oculta todos os cones imediatamente após a derrota
+    cones.forEach((cone) => {
+      cone.style.display = "none";
+    });
+    contadorElement.style.display = "none";
+    // Interrompe completamente o loop do jogo
     clearInterval(loop);
   } else {
     // Pausa temporariamente todos os cones para dar uma chance ao jogador
     cones.forEach((cone) => {
       cone.style.animation = "none";
       setTimeout(() => {
-        cone.style.animation = ""; // Reinicia a animação do cone
+        if (jogoAtivo) cone.style.animation = ""; // Reinicia a animação do cone apenas se o jogo estiver ativo
       }, 500);
     });
   }
@@ -64,15 +73,20 @@ const colisao = () => {
 
 // Função para alternar entre os obstáculos
 const alternarObstaculos = () => {
+  if (!jogoAtivo) return; // Impede a troca de obstáculos se o jogo acabou
   cones.forEach((cone) => cone.style.display = "none"); // Oculta todos os obstáculos
   indiceConeAtual = Math.floor(Math.random() * cones.length); // Sorteia o próximo obstáculo
   cones[indiceConeAtual].style.display = "block"; // Exibe o obstáculo sorteado
 };
 
 // Loop principal do jogo
-const loop = setInterval(() => {
-  const posicacoEstudante = +window.getComputedStyle(estudante).bottom.replace("px", "");
+//let passouCone = false; // Garante que a variável seja resetada no momento certo
 
+// Loop principal do jogo
+const loop = setInterval(() => {
+  if (!jogoAtivo) return; // Impede a execução do loop se o jogo acabou
+
+  const posicacoEstudante = +window.getComputedStyle(estudante).bottom.replace("px", "");
   const coneAtual = cones[indiceConeAtual];
   const posicaoCone = coneAtual.offsetLeft;
 
@@ -80,14 +94,16 @@ const loop = setInterval(() => {
   if (posicaoCone <= 30 && posicaoCone > 0 && posicacoEstudante < 100) {
     colisao(); // Chama a função de colisão
   } else if (posicaoCone < 0 && !passouCone) {
-    contador++;
-    contadorElement.textContent = contador;
-    passouCone = true;
+    contador++; // Incrementa a pontuação
+    contadorElement.textContent = contador; // Atualiza a pontuação na tela
+    passouCone = true; // Marca que o jogador passou o cone
 
     // Alterna para o próximo obstáculo após uma pausa
     setTimeout(() => {
-      passouCone = false;
-      alternarObstaculos(); // Chama a função para trocar o obstáculo
+      if (jogoAtivo) { // Verifica se o jogo ainda está ativo antes de alternar obstáculos
+        passouCone = false; // Reseta a variável para que a próxima colisão seja registrada corretamente
+        alternarObstaculos(); // Chama a função para trocar o obstáculo
+      }
     }, intervaloObstaculos);
   }
 }, 16);
@@ -100,7 +116,7 @@ function recarregar() {
 }
 
 document.addEventListener("keydown", function (event) {
-  if (event.key === "r" || event.key === "R") {
+  if ((event.key === "r" || event.key === "R") && !jogoAtivo) {
     recarregar();
   }
 });

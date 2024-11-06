@@ -29,8 +29,8 @@ body {
     z-index: 1; /* Plano de fundo */
 }
 
-
 .cone {
+    display: none;
     position: absolute;
     bottom: 0;
     width: 490px;
@@ -51,7 +51,6 @@ body {
 
 .estudante {
     width: 180px;
-    
     position: absolute;
     bottom: 150px; /* Ajuste para uma altura acima da grama */
     left: 5%;
@@ -78,38 +77,71 @@ body {
     100% { bottom: 150px; } 
 }
 
+/* Estilo da Pontuação */
 #contador {
     position: absolute;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 60px;
+    font-size: 70px;
     font-weight: bold;
-    color: rgb(8, 8, 8);
+    color: #FFF;
+    text-shadow: 2px 2px 5px #000;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    border-radius: 10px;
     z-index: 5;
+    font-family: 'Poppins', sans-serif;
 }
 
+/* Estilo da Mensagem de Perda */
 #mensagem-perda {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: none;
-    color: #040404;
-    font-size: 34px;
+    color: #FFF;
+    font-size: 40px;
     font-weight: bold;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px 40px;
+    border-radius: 15px;
+    text-align: center;
+    text-shadow: 2px 2px 5px #000;
     z-index: 6;
+    font-family: 'Poppins', sans-serif;
 }
+
+#mensagem-perda::before {
+    content: "GAME OVER 😢";
+    display: block;
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
 #vidas {
     position: absolute;
     top: 20px;
     left: 20px;
     z-index: 5;
     display: flex;
-    gap: 10px;
+    gap: 15px;
 }
 
 .icone-vida {
-    width: 30px; /* Tamanho da imagem de vida */
-    height: 30px;
+    width: 60px; 
+    height: 60px;
+    border-radius: 50%; /* Torna o ícone circular */
+    background-color: #000000; /* Cor de fundo branca para o ícone */
+    padding: 5px; /* Adiciona padding para melhorar a aparência */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* Efeito de sombra suave */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transições para efeitos de hover */
 }
+
+.icone-vida:hover {
+    transform: scale(1.1); /* Efeito de aumento suave no hover */
+    box-shadow: 0 0 25px rgba(255, 255, 255, 1); /* Efeito de brilho mais forte no hover */
+}
+
+

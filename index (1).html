@@ -6,28 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Joguindo de skate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
     <div class="jogo">
-        <div id="vidas"></div> <!-- Contêiner para as imagens de vidas -->
+        <div id="vidas"></div>
         <img src="assents/Brasil.gif" class="estudante">
         <img src="assents/clouds.png" class="nuvens">
         <img src="assents/Cenario.webp" class="cenario">
         <img src="assents/a.png" class="cone cone1">
-        <img src="assents/Idoso.png" class="cone cone2"> <!-- Segundo obstáculo -->
+        <img src="assents/Idoso.png" class="cone cone2"> 
         <img src="assents/Prota.png" class="cone cone3">
-        
+        <img class="vida-extra" src="assents/vidaJogo.png" style="display:none; position: absolute;" />
         <div id="contador">0</div>
-        <div id="mensagem-perda">Pressione "R" para recarregar o joguinho</div>
+        <div id="mensagem-perda">Pressione "R" para recarregar o jogo!</div>
     </div>
     <audio id="musica-fundo" loop>
         <source src="assents/somTransito.mp3" type="audio/mp3">
     </audio>
 
-
     <script src="script.js"></script>
 </body>
-
 </html>
