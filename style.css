@@ -10,7 +10,7 @@ body {
     align-items: center;
     height: 100vh;
     overflow: hidden;
-    background-color: #061014; /* Cor do fundo da tela */
+    background-color: #061014; 
 }
 
 .jogo {
@@ -26,7 +26,7 @@ body {
     height: 115%;
     top: 0;
     left: 0;
-    z-index: 1; /* Plano de fundo */
+    z-index: 1; /
 }
 
 .cone {
@@ -34,10 +34,10 @@ body {
     position: absolute;
     bottom: 0;
     width: 490px;
-    height: 200px; /* Exemplo de altura fixa */
+    height: 200px; 
     z-index: 2;
     animation: coneAnimado 1.6s infinite linear;
-    object-fit: contain; /* Mantém a proporção e preenche o tamanho */
+    object-fit: contain; 
 }
 
 @keyframes coneAnimado {
@@ -52,7 +52,7 @@ body {
 .estudante {
     width: 180px;
     position: absolute;
-    bottom: 150px; /* Ajuste para uma altura acima da grama */
+    bottom: 150px; 
     left: 5%;
     z-index: 4;
     animation: skatistaCorrendo 1s steps(8) infinite;
@@ -72,8 +72,8 @@ body {
 }
 
 @keyframes pulo {
-    0% { bottom: 150px; } /* Posição inicial em relação à grama */
-    40%, 50%, 60% { bottom: 300px; } /* Altura máxima do pulo */
+    0% { bottom: 150px; } 
+    40%, 50%, 60% { bottom: 300px; } 
     100% { bottom: 150px; } 
 }
 
@@ -94,7 +94,6 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-/* Estilo da Mensagem de Perda */
 #mensagem-perda {
     position: absolute;
     top: 50%;
@@ -113,11 +112,18 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-#mensagem-perda::before {
-    content: "GAME OVER 😢";
-    display: block;
+#mensagem-perda .medalha {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-size: cover;
+    margin-top: 10px;
+}
+
+.game-over-text {
     font-size: 50px;
     margin-bottom: 10px;
+    display: block;
 }
 
 #vidas {
@@ -132,16 +138,16 @@ body {
 .icone-vida {
     width: 60px; 
     height: 60px;
-    border-radius: 50%; /* Torna o ícone circular */
-    background-color: #000000; /* Cor de fundo branca para o ícone */
-    padding: 5px; /* Adiciona padding para melhorar a aparência */
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* Efeito de sombra suave */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transições para efeitos de hover */
+    border-radius: 50%; 
+    background-color: #000000; 
+    padding: 5px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 .icone-vida:hover {
-    transform: scale(1.1); /* Efeito de aumento suave no hover */
-    box-shadow: 0 0 25px rgba(255, 255, 255, 1); /* Efeito de brilho mais forte no hover */
+    transform: scale(1.1); 
+    box-shadow: 0 0 25px rgba(255, 255, 255, 1); 
 }
 
 
